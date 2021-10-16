@@ -7,8 +7,7 @@ public class Displacement : MonoBehaviour
     [SerializeField] private Ball _ball;
     [SerializeField] private Rigidbody _rb;
     private InputSystem _input;
-    private bool _isHold = false;
-    private Vector3 _screenMousePosition;
+    private bool _isGameStarted = false;
     private Vector3 _InGameMousePosition;
     private Camera _camera;
     private float _force;
@@ -28,7 +27,7 @@ public class Displacement : MonoBehaviour
     {
         _input = new InputSystem();
 
-        _input.ActionMap.MoveStickFlag.performed += context => _isHold = !_isHold;
+        _input.ActionMap.MoveStickFlag.performed += context => _isGameStarted = true;
 
         _camera = Camera.main;
     }
@@ -45,10 +44,10 @@ public class Displacement : MonoBehaviour
 
     void Update()
     {
-        if(_isHold) 
+        if(_isGameStarted) 
         {
             ForcePlatform();
-                _ball.isStart = true;
+            _ball.isStart = true;
         }
     }
 }

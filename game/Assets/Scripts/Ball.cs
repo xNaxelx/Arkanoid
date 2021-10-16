@@ -49,16 +49,23 @@ public class Ball : MonoBehaviour
             _isStart = false;
             _rb.velocity = new Vector3(0, 1, 0) * _speed;
         }
-        Debug.Log(_rb.velocity.magnitude);
-        if(_rb.velocity.magnitude > _maxSpeed + 0.1)
-        {
-            _rb.velocity *= (_maxSpeed / _rb.velocity.magnitude);
-        }
-        else if(_rb.velocity.magnitude < _maxSpeed - 0.1)
-        {
-            _rb.velocity *= (_maxSpeed / _rb.velocity.magnitude);
-        }
 
+        if (isStart)
+        {
+            if (_rb.velocity.magnitude > _maxSpeed + 0.1)
+            {
+                _rb.velocity *= (_maxSpeed / _rb.velocity.magnitude);
+            }
+            else if (_rb.velocity.magnitude < _maxSpeed - 0.1)
+            {
+                _rb.velocity *= (_maxSpeed / _rb.velocity.magnitude);
+            }
+            if(_rb.velocity.y == 0)
+            {
+                _velocityEditor.Set(_rb.velocity.x, 0.1f, _rb.velocity.z);
+                _rb.velocity = _velocityEditor;
+            }
+        }
     }
 
 }
